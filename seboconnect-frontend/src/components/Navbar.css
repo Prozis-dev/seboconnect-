@@ -1,0 +1,166 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #2c3e50;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-grow: 1;
+  max-width: 800px;
+}
+
+.logo {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.search-form, .advanced-form {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.search-filter {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: none;
+  background-color: white;
+  width: 100px;
+}
+
+.search-input {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: none;
+  flex-grow: 1;
+  min-width: 150px;
+}
+
+.search-button {
+  padding: 0.5rem 1rem;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  white-space: nowrap;
+}
+
+.search-button:hover {
+  background: #c0392b;
+}
+
+.toggle-advanced, .toggle-simple {
+  padding: 0.5rem;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  white-space: nowrap;
+}
+
+.toggle-advanced:hover, .toggle-simple:hover {
+  background: #2980b9;
+}
+
+.advanced-filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-grow: 1;
+}
+
+.advanced-filters input {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: none;
+  flex-grow: 1;
+  min-width: 120px;
+}
+
+.advanced-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.navbar-right {
+  display: flex;
+  gap: 1rem;
+  margin-left: 1rem;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem;
+  transition: color 0.3s;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: #ecf0f1;
+}
+
+.logout-button {
+  padding: 0.5rem 1rem;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  white-space: nowrap;
+}
+
+.logout-button:hover {
+  background: #c0392b;
+}
+.advanced-filters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+}
+
+.advanced-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.clear-button {
+  background-color: #ccc;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.clear-button:hover {
+  background-color: #bbb;
+}

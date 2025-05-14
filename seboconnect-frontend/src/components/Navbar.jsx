@@ -1,61 +1,68 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
+import './Navbar.css';
 
 export default function Navbar() {
   const { user, logout } = useContext(AuthContext);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filter, setFilter] = useState('titulo');
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
+  const handleSimpleSearch = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      navigate(`/books?${filter}=${encodeURIComponent(searchTerm.trim())}`);
+    } else {
+      navigate('/books');
+    }
   };
 
   return (
-    <nav style={{ 
-      display: 'flex', 
-      justifyContent: 'space-between', 
-      padding: '1rem', 
-      background: '#f0f0f0',
-      marginBottom: '2rem'
-    }}>
-      <div>
-        <Link to="/" style={{ marginRight: '1rem' }}>Home</Link>
-        {user && (
+    <nav className="navbar">
+      <div className="navbar-left">
+        <Link to="/" className="logo">
+          SeboConnect
+        </Link>
+
+        <form onSubmit={handleSimpleSearch} className="search-form">
+          <select 
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+            className="search-filter"
+          >
+            <option value="titulo">Título</option>
+            <option value="autor">Autor</option>
+            <option value="editora">Editora</option>
+          </select>
+          <input
+            type="text"
+            placeholder="Pesquisar livros..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="search-input"
+          />
+          <button type="submit" className="search-button">
+            Buscar
+          </button>
+        </form>
+      </div>
+
+      <div className="navbar-right">
+        {user ? (
           <>
-            <Link to="/books" style={{ marginRight: '1rem' }}>Livros</Link>
-            <Link to="/add-book">Vender Livro</Link>
+            <Link to="/add-book" className="nav-link">Vender Livro</Link>
+            <button onClick={logout} className="logout-button">
+              Sair
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/login" className="nav-link">Login</Link>
+            <Link to="/register" className="nav-link">Sign up</Link>
           </>
         )}
       </div>
-      {user ? (
-        <button 
-          onClick={handleLogout}
-          style={{
-            padding: '0.5rem 1rem',
-            background: '#dc3545',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer'
-          }}
-        >
-          Sair
-        </button>
-      ) : (
-        <Link 
-          to="/login"
-          style={{
-            padding: '0.5rem 1rem',
-            background: '#007bff',
-            color: 'white',
-            borderRadius: '4px',
-            textDecoration: 'none'
-          }}
-        >
-          Login
-        </Link>
-      )}
     </nav>
   );
 }
