@@ -2,17 +2,17 @@ import Book from '../models/book.js';
 
 export const createBook = async (req, res) => {
   try {
-    const { titulo, autor, preco, descricao, categoria, estado, editor } = req.body;
-    
+    const { titulo, autor, editora, preco, descricao, categoria, estado } = req.body; // Adicionado 'editora'
+
     const newBook = await Book.create({
       titulo,
       autor,
+      editora, // Adicionado 'editora'
       preco,
       descricao,
       categoria,
       estado,
-      editor, // Adicionado campo editor
-      vendedor: req.user._id 
+      vendedor: req.user._id
     });
 
     res.status(201).json({
@@ -30,23 +30,19 @@ export const createBook = async (req, res) => {
 
 export const getBooks = async (req, res) => {
   try {
-    const { titulo, autor, editor, limit } = req.query;
-    const filters = {};
+    const books = await Book.find()
+      .populate('vendedor', 'nome email cidade estado');
 
-    // Filtros dinâmicos
-    if (titulo) filters.titulo = { $regex: titulo, $options: 'i' };
-    if (autor) filters.autor = { $regex: autor, $options: 'i' };
-    if (editor) filters.editor = { $regex: editor, $options: 'i' };
+    res.status(200).json({
+      success: true,
+      books
+    });
 
-    // Limite de resultados (para a Landing Page)
-    const query = Book.find(filters).populate('vendedor', 'nome cidade');
-    if (limit) query.limit(parseInt(limit));
-
-    const books = await query;
-
-    res.status(200).json({ success: true, books });
   } catch (error) {
-    res.status(500).json({ error: 'Erro ao buscar livros', details: error.message });
+    res.status(500).json({
+      error: 'Erro ao buscar livros',
+      details: error.message
+    });
   }
 };
 

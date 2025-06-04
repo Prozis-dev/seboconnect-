@@ -10,6 +10,11 @@ const bookSchema = new mongoose.Schema({
     type: String,
     required: [true, 'O autor é obrigatório']
   },
+  editora: { // Novo campo adicionado
+    type: String,
+    // required: [true, 'A editora é obrigatória'], // Descomente se quiser tornar obrigatório
+    trim: true
+  },
   preco: {
     type: Number,
     required: [true, 'O preço é obrigatório'],
@@ -35,10 +40,10 @@ const bookSchema = new mongoose.Schema({
     required: true
   },
   imagem: {
-    type: String 
+    type: String
   }
-}, { 
-  timestamps: true 
+}, {
+  timestamps: true
 });
 
 export default mongoose.model('Book', bookSchema);
