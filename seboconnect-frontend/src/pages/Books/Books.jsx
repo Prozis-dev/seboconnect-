@@ -14,7 +14,7 @@ export default function Books() {
         const response = await api.get('/books');
         setBooks(response.data.books);
       } catch (err) {
-        setError('Erro ao carregar livros. Tente novamente.');
+        setError('Ocorreu um erro ao carregor os livros. Tente novamente mais tarde.');
         console.error('Erro:', err);
       } finally {
         setLoading(false);
